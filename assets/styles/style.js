@@ -13,7 +13,7 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "center",
     alignItems: "center",
-    gap: 12,
+    gap: 10,
   },
   timerText: {
     fontSize: 50,
@@ -44,6 +44,10 @@ const styles = StyleSheet.create({
     paddingVertical: 16,
     justifyContent: "center",
     alignItems: "center",
+    position: "relative",
+    bottom: 0,
+    left: 0,
+    width: "auto",
   },
   slogan: {
     fontSize: 30,

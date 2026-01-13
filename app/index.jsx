@@ -2,7 +2,7 @@ import Timer from "../components/Timer";
 import styles from '../assets/styles/style';
 
 import { useState } from 'react';
-import { Pause, Play, RefreshCwIcon } from 'lucide-react';
+import { Pause, Play, RefreshCwIcon } from 'lucide-react-native';
 import { Text, TouchableOpacity, View } from 'react-native';
 
 
@@ -17,6 +17,9 @@ export default function App() {
 
       {/* Action: Play/Pause/Restart */}
       <View style={styles.actions}>
+        <TouchableOpacity style={[styles.btn, styles.restartBtn]}>
+          <RefreshCwIcon />
+        </TouchableOpacity>
         <TouchableOpacity style={[styles.btn, styles.playBtn]}>
           {state ?
             <Play />
@@ -25,9 +28,6 @@ export default function App() {
           }
         </TouchableOpacity>
 
-        <TouchableOpacity style={[styles.btn, styles.restartBtn]}>
-          <RefreshCwIcon />
-        </TouchableOpacity>
       </View>
 
       {/* Footer */}

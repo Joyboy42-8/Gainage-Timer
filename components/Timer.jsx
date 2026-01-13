@@ -1,4 +1,5 @@
 import styles from "../assets/styles/style";
+import { Text, View } from 'react-native';
 
 export default function Timer({ time }) {
     return (
