@@ -1,33 +1,70 @@
 import Timer from "../components/Timer";
 import styles from '../assets/styles/style';
 
-import { useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
+import { Image, Text, TouchableOpacity, View } from 'react-native';
 import { Pause, Play, RefreshCwIcon } from 'lucide-react-native';
-import { Text, TouchableOpacity, View } from 'react-native';
-
 
 export default function App() {
-  const [timer, setTimer] = useState({ min: 0o5, sec: 0o0 });
-  const [state, setState] = useState(false);
+  const [timer, setTimer] = useState(300);
+  const [isGaining, setIsGaining] = useState(false);
+  const intervalRef = useRef();
+
+  const handleStateChange = () => setIsGaining(prev => !prev);
+
+  const handleReset = () => {
+    setIsGaining(false);
+    setTimer(300);
+  }
+
+  useEffect(() => {
+    if (!isGaining) {
+      clearInterval(intervalRef.current);
+      return;
+    }
+
+    intervalRef.current = setInterval(() => {
+      setTimer(prev => {
+        if (prev <= 1) {
+          clearInterval(intervalRef.current);
+          setIsGaining(false);
+          return 0;
+        }
+        return prev - 1;
+      });
+    }, 1000);
+
+
+    // Cleanup
+    return () => clearInterval(intervalRef.current);
+  }, [isGaining]);
 
   return (
     <View style={styles.container}>
-      {/* Timer Component */}
-      <Timer time={timer} />
+      <View style={styles.mainContent}>
+        {/* Timer Component */}
+        <Timer time={timer} />
 
-      {/* Action: Play/Pause/Restart */}
-      <View style={styles.actions}>
-        <TouchableOpacity style={[styles.btn, styles.restartBtn]}>
-          <RefreshCwIcon />
-        </TouchableOpacity>
-        <TouchableOpacity style={[styles.btn, styles.playBtn]}>
-          {state ?
-            <Play />
-            :
-            <Pause />
-          }
-        </TouchableOpacity>
+        {/* Background Image */}
+        <Image
+          source={require('../assets/images/plank.png')}
+          style={styles.watermark}
+          resizeMode="contain"
+        />
 
+        {/* Action: Play/Pause/Restart */}
+        <View style={styles.actions}>
+          <TouchableOpacity style={[styles.btn, styles.restartBtn]} onPress={handleReset}>
+            <RefreshCwIcon color="black" />
+          </TouchableOpacity>
+          <TouchableOpacity style={[styles.btn, styles.playBtn]} onPress={handleStateChange}>
+            {isGaining ?
+              <Pause color="white" />
+              :
+              <Play color="white" />
+            }
+          </TouchableOpacity>
+        </View>
       </View>
 
       {/* Footer */}

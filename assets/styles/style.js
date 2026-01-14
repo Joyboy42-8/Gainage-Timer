@@ -8,6 +8,22 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
   },
+  mainContent: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: 'center',
+    paddingHorizontal: 30,
+    gap: 50,
+    zIndex: 1,
+  },
+  watermark: {
+    position: 'absolute',
+    width: '100%',
+    opacity: 0.08, // effet filigrane
+    top: -80,
+    left: -20,
+    zIndex: 0,
+  },
 
   timer: {
     flexDirection: "row",
@@ -17,11 +33,11 @@ const styles = StyleSheet.create({
   },
   timerText: {
     fontSize: 50,
-    fontWeight: "black",
+    fontWeight: "bold",
     color: Colors.text,
   },
-  
-  
+
+
   actions: {
     flexDirection: "row",
     justifyContent: "center",
@@ -35,24 +51,27 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
     color: Colors.text,
+    color: "white",
   },
-  playBtn: {},
-  restartBtn: {},
-  
+  playBtn: {
+    backgroundColor: Colors.accent,
+  },
+  restartBtn: {
+    backgroundColor: Colors.text,
+  },
+
 
   footer: {
-    paddingVertical: 16,
+    marginBottom: 64,
     justifyContent: "center",
     alignItems: "center",
-    position: "relative",
-    bottom: 0,
-    left: 0,
-    width: "auto",
   },
   slogan: {
     fontSize: 30,
     fontWeight: "bold",
     color: Colors.text,
+    fontStyle: "italic",
+    opacity: 0.3,
   },
 });
 
